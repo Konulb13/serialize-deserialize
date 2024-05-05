@@ -14,7 +14,7 @@ public class ClassSerialize {
                 continue;
             if (Modifier.isPrivate(field.getModifiers()))
                 field.setAccessible(true);
-            stringBuilder.append(field.getName() + " = ");
+            stringBuilder.append(field.getName() + "=");
             if (field.getType() == int.class) {
                 stringBuilder.append(field.getInt(object));
             } else if (field.getType() == String.class) {
@@ -22,14 +22,14 @@ public class ClassSerialize {
             } else if (field.getType() == long.class) {
                 stringBuilder.append(field.getLong(object));
             }
-            stringBuilder.append(" : ");
+            stringBuilder.append(":");
         }
         return stringBuilder.toString();
     }
 
     public static <T> T deserialize(String string, Class<T> tClass) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchFieldException {
         T res = (T) tClass.getDeclaredConstructor().newInstance();
-        String[] st = string.split(" : ");
+        String[] st = string.split(":");
         for (String s : st) {
             String[] sp = s.split("=");
             if (sp.length != 2)
